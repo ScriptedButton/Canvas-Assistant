@@ -30,6 +30,11 @@ namespace Canvas
 
         public static string token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "\\token.txt");
 
+        public void updateToken(string token2)
+        {
+            token = token2;
+        }
+
         public string getScore(string course_id, string id)
         {
             try
@@ -119,6 +124,7 @@ namespace Canvas
 
         public Main()
         {
+            token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "\\token.txt");
             InitializeComponent();
 
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -127,10 +133,9 @@ namespace Canvas
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Red800, Primary.Red900, Primary.Red500, Accent.Red200, TextShade.WHITE);
             if (token == "")
             {
-                this.Close();
+                this.Hide();
                 Portal portal = new Portal();
                 portal.ShowDialog();
-                token = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + "\\token.txt");
             }
             loadDict();
             WebClient Wc = new WebClient();

@@ -30,15 +30,18 @@ namespace Canvas
             {
 
                 //Pass the filepath and filename to the StreamWriter Constructor
-                StreamWriter sw = new StreamWriter(System.IO.Directory.GetCurrentDirectory() + "\\token.txt");
 
-                //Write a line of text
-                sw.Write(materialSingleLineTextField1.Text);
 
-                //Close the file
-                sw.Close();
+                string filename = System.IO.Directory.GetCurrentDirectory() + "\\token.txt";
+                using (StreamWriter writeFile = new StreamWriter(filename, true))
+                {
+                    writeFile.Write(materialSingleLineTextField1.Text);
+                }
+
                 Main main = new Main();
-                main.Show();
+                main.updateToken(materialSingleLineTextField1.Text);
+
+                this.Close();
             }
             catch (Exception err)
             {
